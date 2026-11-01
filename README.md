@@ -23,8 +23,14 @@ Depois abra http://localhost:8000.
 ## Como publicar no GitHub Pages
 
 1. Crie um repositório público no GitHub e envie o conteúdo desta pasta para a branch `main`.
-2. No repositório: Settings → Pages → Source: "Deploy from a branch" → `main` / `(root)`.
-3. Em alguns minutos o site fica em `https://<seu-usuario>.github.io/<repositorio>/`.
+2. No repositório: Settings → Pages → Source: **GitHub Actions**.
+3. Cada push na `main` roda `.github/workflows/pages.yml`, que publica o site em
+   `https://<seu-usuario>.github.io/<repositorio>/` em cerca de um minuto.
+
+O workflow troca `__VERSAO__` no `index.html` pelo commit (`estilo.css?v=1a2b3c4d`), então o
+navegador baixa CSS e JS novos a cada publicação, sem precisar de Ctrl+F5. Localmente o
+`__VERSAO__` fica como está e não atrapalha. Ao criar um novo arquivo JS, inclua-o no import
+map do `index.html`.
 
 ## Estrutura
 
@@ -36,6 +42,8 @@ js/api.js           chamadas à API, troca de endereço em caso de falha, limpez
 js/interface.js     funções que desenham grade, painel, paginação e mensagens
 js/favoritos.js     favoritos salvos no navegador (localStorage)
 js/main.js          estado da página e eventos
+.github/workflows/  publicação no GitHub Pages com versão nos arquivos
+TODO.md             pendências
 ```
 
 ## Observações

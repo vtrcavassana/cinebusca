@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CineBusca</title>
   <meta name="description" content="Catálogo para pesquisar filmes: notas, sinopses, elenco e trailers.">
-  <link rel="stylesheet" href="css/estilo.css">
-  <script type="module" src="js/main.js"></script>
+  <!-- O marcador de versão (?v=) é trocado pelo commit no deploy (.github/workflows/pages.yml),
+       para o navegador baixar os arquivos novos sem Ctrl+F5 -->
+  <link rel="stylesheet" href="css/estilo.css?v=__VERSAO__">
+  <!-- O import map leva a versão também aos imports internos dos módulos -->
+  <script type="importmap">
+    {
+      "imports": {
+        "./js/config.js": "./js/config.js?v=__VERSAO__",
+        "./js/api.js": "./js/api.js?v=__VERSAO__",
+        "./js/favoritos.js": "./js/favoritos.js?v=__VERSAO__",
+        "./js/interface.js": "./js/interface.js?v=__VERSAO__"
+      }
+    }
+  </script>
+  <script type="module" src="js/main.js?v=__VERSAO__"></script>
 </head>
 <body>
   <header class="topo">

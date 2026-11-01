@@ -1,0 +1,48 @@
+# Publica o site no GitHub Pages a cada push na main.
+# Troca __VERSAO__ no index.html pelo commit, para o navegador não usar CSS/JS antigos do cache.
+# Requer Settings -> Pages -> Source: "GitHub Actions".
+name: Publicar no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Montar o site com a versão do commit
+        run: |
+          versao="${GITHUB_SHA::8}"
+          mkdir _site
+          cp -r index.html css js _site/
+          sed -i "s/__VERSAO__/${versao}/g" _site/index.html
+          if grep -q "__VERSAO__" _site/index.html; then
+            echo "::error::__VERSAO__ não foi trocado no index.html"
+            exit 1
+          fi
+          echo "Versão publicada: ${versao}"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

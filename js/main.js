@@ -12,7 +12,7 @@ import {
 const estado = {
   busca: '',
   genero: '',
-  ordem: 'rating',
+  ordem: 'date_added',
   pagina: 1,
   modo: 'catalogo', // 'catalogo' ou 'favoritos'
   selecionado: null, // id do filme aberto no painel
@@ -89,7 +89,16 @@ function mostrarFavoritos() {
   renderizarGrade(elementos.grade, favoritos, estado.selecionado);
 }
 
+// Limpa o painel quando a lista muda (página, busca, filtro ou modo)
+function fecharDetalhes() {
+  numeroDetalhe++; // descarta detalhes que ainda estejam a caminho
+  estado.selecionado = null;
+  estado.filmeAberto = null;
+  renderizarPainelVazio(elementos.painel);
+}
+
 function atualizarLista() {
+  fecharDetalhes();
   elementos.botaoFavoritos.setAttribute('aria-pressed', String(estado.modo === 'favoritos'));
   if (estado.modo === 'favoritos') {
     mostrarFavoritos();
@@ -209,7 +218,6 @@ function iniciar() {
   renderizarGeneros(elementos.generos, estado.genero);
   elementos.ordem.value = estado.ordem;
   atualizarContadorFavoritos();
-  renderizarPainelVazio(elementos.painel);
   ligarEventos();
   atualizarLista();
 }

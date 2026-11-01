@@ -10,7 +10,8 @@ export const DOMINIOS_API = [
 // Tempo máximo de espera por resposta, em milissegundos
 export const TEMPO_LIMITE_MS = 10000;
 
-// Filmes por página (a API aceita de 1 a 50)
+// Filmes por página (a API aceita de 1 a 50). A grade usa 2, 3, 4 ou 6 colunas;
+// se mudar este número, mantenha-o divisível por elas (ver css/estilo.css)
 export const ITENS_POR_PAGINA = 24;
 
 // Espera depois da última tecla antes de buscar, em milissegundos

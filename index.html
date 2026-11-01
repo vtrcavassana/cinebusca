@@ -26,9 +26,9 @@
       <label class="ordem">
         <span class="sr-only">Ordenar por</span>
         <select id="seletor-ordem">
+          <option value="date_added">Adicionados recentemente</option>
           <option value="rating">Melhor nota</option>
           <option value="year">Mais recentes</option>
-          <option value="date_added">Adicionados recentemente</option>
           <option value="title">A–Z</option>
         </select>
       </label>
@@ -37,7 +37,9 @@
     <p id="resumo" class="resumo" aria-live="polite"></p>
 
     <div class="layout">
-      <section id="grade" class="grade" aria-label="Resultados"></section>
+      <div class="area-grade">
+        <section id="grade" class="grade" aria-label="Resultados"></section>
+      </div>
       <aside id="painel" class="painel" aria-label="Detalhes do filme"></aside>
     </div>
 

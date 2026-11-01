@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineBusca</title>
+  <meta name="description" content="Catálogo para pesquisar filmes: notas, sinopses, elenco e trailers.">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="logo" href="./">Cine<span>Busca</span></a>
+    <label class="busca">
+      <span class="sr-only">Buscar filmes</span>
+      <input id="campo-busca" type="search" placeholder="Buscar por título, ator ou diretor" autocomplete="off">
+    </label>
+    <button id="botao-favoritos" class="botao" type="button" aria-pressed="false">
+      Favoritos <span id="contador-favoritos" class="contador">0</span>
+    </button>
+  </header>
+
+  <main class="conteudo">
+    <div class="filtros">
+      <div id="lista-generos" class="chips" role="group" aria-label="Gêneros"></div>
+      <label class="ordem">
+        <span class="sr-only">Ordenar por</span>
+        <select id="seletor-ordem">
+          <option value="rating">Melhor nota</option>
+          <option value="year">Mais recentes</option>
+          <option value="date_added">Adicionados recentemente</option>
+          <option value="title">A–Z</option>
+        </select>
+      </label>
+    </div>
+
+    <p id="resumo" class="resumo" aria-live="polite"></p>
+
+    <div class="layout">
+      <section id="grade" class="grade" aria-label="Resultados"></section>
+      <aside id="painel" class="painel" aria-label="Detalhes do filme"></aside>
+    </div>
+
+    <nav id="paginacao" class="paginacao" aria-label="Paginação"></nav>
+  </main>
+
+  <footer class="rodape">
+    <p>CineBusca é um catálogo informativo. Os dados dos filmes vêm de uma API pública; este site não hospeda nem distribui filmes.</p>
+  </footer>
+</body>
+</html>
